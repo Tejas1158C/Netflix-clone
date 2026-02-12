@@ -1,0 +1,21 @@
+.category-page{
+  padding-top:100px;
+  padding-left:40px;
+}
+
+.category-grid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+}
+
+.category-grid img{
+  width:200px;
+  border-radius:6px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.category-grid img:hover{
+  transform:scale(1.1);
+}

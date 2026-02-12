@@ -1,0 +1,37 @@
+/* FULL PAGE */
+.page{
+  min-height: 100vh;
+  background: #141414;
+  color: white;
+  padding-top: 90px;
+}
+
+/* TITLE */
+.page h1{
+  margin-left: 40px;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+/* GRID */
+.grid{
+  margin-top: 20px;
+  padding: 20px 40px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px,1fr));
+  gap: 20px;
+}
+
+/* MOVIE CARD */
+.grid img{
+  width: 100%;
+  border-radius: 8px;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+/* HOVER EFFECT */
+.grid img:hover{
+  transform: scale(1.08);
+}

@@ -1,0 +1,65 @@
+.profiles{
+  background:#141414;
+  min-height:100vh;
+  color:white;
+  text-align:center;
+  padding-top:120px;
+}
+
+.profiles h1{
+  font-size:40px;
+  margin-bottom:40px;
+}
+
+.profiles-grid{
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  flex-wrap:wrap;
+}
+
+.profile-card img{
+  width:120px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.profile-card p{
+  margin-top:10px;
+}
+
+.add-profile input{
+  padding:10px;
+  margin-bottom:10px;
+}
+
+.avatar-list{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+}
+
+.avatar-list img{
+  width:50px;
+  cursor:pointer;
+  border-radius:50%;
+}
+
+.avatar-list .active{
+  border:3px solid red;
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.7);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.modal-box{
+  background:#222;
+  padding:30px;
+  border-radius:8px;
+}

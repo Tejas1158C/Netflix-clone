@@ -1,0 +1,42 @@
+.mylist-page {
+  padding-top: 100px;
+  padding-left: 40px;
+  color: white;
+}
+
+.mylist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 200px);
+  gap: 20px;
+}
+
+.mylist-card {
+  position: relative;
+}
+
+.mylist-card img {
+  width: 200px;
+  border-radius: 6px;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.8);
+  padding: 8px;
+  display: none;
+}
+
+.mylist-card:hover .overlay {
+  display: block;
+}
+
+.overlay button {
+  width: 100%;
+  background: red;
+  border: none;
+  color: white;
+  padding: 6px;
+  cursor: pointer;
+}

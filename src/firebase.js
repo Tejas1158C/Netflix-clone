@@ -3,16 +3,31 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-  sendSignInLinkToEmail,
-  isSignInWithEmailLink,
-  signInWithEmailLink,
-  signOut
+  signOut,
+  sendPasswordResetEmail
 } from "firebase/auth";
 
-import { getFirestore, addDoc, collection } from "firebase/firestore";
-import { toast } from "react-toastify";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  where,
+  updateDoc,
+  doc,
+  arrayUnion,
+  arrayRemove
+} from "firebase/firestore";
 
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL
+} from "firebase/storage";
+
+////////////////////////////////////////////////////
 const firebaseConfig = {
   apiKey: "AIzaSyAfX52-wASO2WAZBMsjijuH4-RK75H3QPo",
   authDomain: "netflix-clone-5e585.firebaseapp.com",
@@ -23,93 +38,115 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+export const storage = getStorage(app);
 
-////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////
 // SIGNUP
-////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////
 export const signup = async (name, email, password) => {
-  if (!name || !email || !password) {
-    toast.error("Fill all fields");
-    return;
-  }
+  const res = await createUserWithEmailAndPassword(auth, email, password);
 
-  try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-    await addDoc(collection(db, "users"), {
-      uid: res.user.uid,
-      name,
-      email
-    });
-
-    toast.success("Account created");
-  } catch (error) {
-    toast.error(error.message);
-  }
+  await addDoc(collection(db, "users"), {
+    uid: res.user.uid,
+    name,
+    email,
+    phone: "",
+    avatar: "",
+    myList: []
+  });
 };
 
-////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////
 // LOGIN
-////////////////////////////////////////////////////////////
-export const login = async (email, password) => {
-  if (!email || !password) {
-    toast.error("Enter email & password");
-    return;
-  }
+////////////////////////////////////////////////////
+export const login = (email, password) =>
+  signInWithEmailAndPassword(auth, email, password);
 
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    toast.success("Login successful");
-  } catch {
-    toast.error("Wrong email or password");
-  }
-};
+////////////////////////////////////////////////////
+// LOGOUT
+////////////////////////////////////////////////////
+export const logout = () => signOut(auth);
 
-////////////////////////////////////////////////////////////
-// RESET PASSWORD (REAL EMAIL TO GMAIL)
-////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////
+// RESET PASSWORD
+////////////////////////////////////////////////////
 export const resetPassword = async (email) => {
   if (!email) {
-    toast.error("Enter email first");
+    alert("Enter email first");
     return;
   }
 
-  try {
-    await sendPasswordResetEmail(auth, email);
-    toast.success("Reset email sent to Gmail 📩");
-  } catch {
-    toast.error("Email not found");
-  }
+  await sendPasswordResetEmail(auth, email);
+  alert("Password reset email sent");
 };
 
-////////////////////////////////////////////////////////////
-// MAGIC LINK LOGIN (EMAIL LINK LOGIN)
-////////////////////////////////////////////////////////////
-export const sendMagicLink = async (email) => {
-  const actionCodeSettings = {
-    url: "http://localhost:5173",
-    handleCodeInApp: true
-  };
+////////////////////////////////////////////////////
+// GET PROFILE
+////////////////////////////////////////////////////
+export const getProfile = async () => {
+  const user = auth.currentUser;
+  if (!user) return null;
 
-  try {
-    await sendSignInLinkToEmail(auth, email, actionCodeSettings);
-    localStorage.setItem("emailForSignIn", email);
-    toast.success("Login link sent to Gmail 📩");
-  } catch (e) {
-    toast.error(e.message);
-  }
+  const q = query(collection(db, "users"), where("uid", "==", user.uid));
+  const snap = await getDocs(q);
+
+  if (snap.empty) return null;
+
+  const d = snap.docs[0];
+  return { id: d.id, ...d.data() };
 };
 
-export const completeMagicLogin = async () => {
-  if (isSignInWithEmailLink(auth, window.location.href)) {
-    let email = localStorage.getItem("emailForSignIn");
-    if (!email) email = prompt("Enter email");
+////////////////////////////////////////////////////
+// ADD TO MY LIST
+////////////////////////////////////////////////////
+export const addToMyList = async (docId, movie) => {
+  console.log("ADDING:", movie);
 
-    await signInWithEmailLink(auth, email, window.location.href);
-    toast.success("Logged in with email link");
-  }
+  const refDoc = doc(db, "users", docId);
+
+  await updateDoc(refDoc, {
+    myList: arrayUnion(movie)
+  });
+
+  console.log("ADDED SUCCESS");
 };
 
-////////////////////////////////////////////////////////////222222222222222222222++++++++++++++++++++++++++++++++++
-export const logout = () => signOut(auth);
+////////////////////////////////////////////////////
+// REMOVE FROM MY LIST
+////////////////////////////////////////////////////
+export const removeFromMyList = async (docId, movie) => {
+  const refDoc = doc(db, "users", docId);
+
+  await updateDoc(refDoc, {
+    myList: arrayRemove(movie)
+  });
+};
+
+////////////////////////////////////////////////////
+// UPDATE PROFILE
+////////////////////////////////////////////////////
+export const updateProfileData = async (docId, data) => {
+  const refDoc = doc(db, "users", docId);
+
+  await updateDoc(refDoc, {
+    name: data.name || "",
+    email: data.email || "",
+    phone: data.phone || "",
+    avatar: data.avatar || ""
+  });
+};
+
+////////////////////////////////////////////////////
+// UPLOAD AVATAR
+////////////////////////////////////////////////////
+export const uploadAvatar = async (file, userId) => {
+  const storageRef = ref(storage, `avatars/${userId}.png`);
+
+  await uploadBytes(storageRef, file);
+
+  const url = await getDownloadURL(storageRef);
+  return url;
+};

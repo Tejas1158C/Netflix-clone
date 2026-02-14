@@ -8,6 +8,7 @@ import info_icon from '../../assets/info_icon.png'
 import TitleCards from '../../components/TitileCards/TitleCards'
 import Footer from '../../components/Footer/Footer'
 
+
 const Home = () => {
   return (
     <div className='home'>
@@ -24,6 +25,7 @@ const Home = () => {
             <TitleCards />
         </div>
     </div>
+
     <div className="more-cards">
       <TitleCards title={"Blockbuster Movies"}category={"top_rated"}/>
       <TitleCards title={"Only on Netflix"}category={"popular"}/>

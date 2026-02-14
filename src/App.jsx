@@ -11,6 +11,9 @@ import Search from "./pages/Search/Search";
 import Movies from "./pages/Movies/Movies";
 import TVShows from "./pages/TVShows/TVShows";
 import NewPopular from "./pages/NewPopular/NewPopular";
+import Profile from "./pages/Profile/Profile";
+import MyList from "./pages/MyList/MyList";
+
 
 
 const App = () => {
@@ -44,6 +47,8 @@ const App = () => {
         <Route path="/tv" element={<TVShows />} />
         <Route path="/new" element={<NewPopular />} />
         <Route path="/player/:id" element={<Player />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/mylist" element={<MyList />} />
       </Routes>
     </div>
   );

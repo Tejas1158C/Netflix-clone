@@ -1,0 +1,28 @@
+.movie-card {
+  position: relative;
+}
+
+.movie-card img {
+  width: 180px;
+  border-radius: 6px;
+}
+
+.movie-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: none;
+}
+
+.movie-card:hover .movie-overlay {
+  display: block;
+}
+
+.movie-overlay button {
+  width: 100%;
+  background: red;
+  color: white;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+}

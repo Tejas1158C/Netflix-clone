@@ -1,65 +1,67 @@
-.profiles{
-  background:#141414;
-  min-height:100vh;
-  color:white;
-  text-align:center;
-  padding-top:120px;
+/* PAGE BACKGROUND */
+.profile-page {
+  min-height: 100vh;
+  background: #141414;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 80px;
 }
 
-.profiles h1{
-  font-size:40px;
-  margin-bottom:40px;
+/* CARD */
+.profile-card {
+  width: 420px;
+  background: #1f1f1f;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
 }
 
-.profiles-grid{
-  display:flex;
-  justify-content:center;
-  gap:40px;
-  flex-wrap:wrap;
+/* AVATAR */
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  object-fit: cover;
+  border: 3px solid red;
 }
 
-.profile-card img{
-  width:120px;
-  border-radius:10px;
-  cursor:pointer;
+/* INPUTS */
+.profile-card input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 5px;
+  border: none;
+  background: #333;
+  color: white;
 }
 
-.profile-card p{
-  margin-top:10px;
+/* BUTTONS */
+.save-btn {
+  width: 100%;
+  padding: 12px;
+  background: red;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.add-profile input{
-  padding:10px;
-  margin-bottom:10px;
+.edit-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: red;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.avatar-list{
-  display:flex;
-  gap:10px;
-  justify-content:center;
-}
-
-.avatar-list img{
-  width:50px;
-  cursor:pointer;
-  border-radius:50%;
-}
-
-.avatar-list .active{
-  border:3px solid red;
-}
-
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.7);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-.modal-box{
-  background:#222;
-  padding:30px;
-  border-radius:8px;
+.save-btn:hover,
+.edit-btn:hover {
+  background: #e50914;
 }

@@ -27,6 +27,8 @@ import {
   getDownloadURL
 } from "firebase/storage";
 
+import { toast } from "react-toastify";
+
 ////////////////////////////////////////////////////
 const firebaseConfig = {
   apiKey: "AIzaSyAfX52-wASO2WAZBMsjijuH4-RK75H3QPo",
@@ -47,40 +49,80 @@ export const storage = getStorage(app);
 // SIGNUP
 ////////////////////////////////////////////////////
 export const signup = async (name, email, password) => {
-  const res = await createUserWithEmailAndPassword(auth, email, password);
+  try {
+    const res = await createUserWithEmailAndPassword(auth, email, password);
 
-  await addDoc(collection(db, "users"), {
-    uid: res.user.uid,
-    name,
-    email,
-    phone: "",
-    avatar: "",
-    myList: []
-  });
+    await addDoc(collection(db, "users"), {
+      uid: res.user.uid,
+      name,
+      email,
+      phone: "",
+      avatar: "",
+      myList: []
+    });
+
+    toast.success("Account created 🎉");
+  } catch (err) {
+
+    if (err.code === "auth/email-already-in-use") {
+      toast.error("Email already exists. Please login.");
+    }
+    else if (err.code === "auth/weak-password") {
+      toast.error("Password must be at least 6 characters");
+    }
+    else if (err.code === "auth/invalid-email") {
+      toast.error("Invalid email address");
+    }
+    else {
+      toast.error("Signup failed");
+    }
+  }
 };
 
 ////////////////////////////////////////////////////
 // LOGIN
 ////////////////////////////////////////////////////
-export const login = (email, password) =>
-  signInWithEmailAndPassword(auth, email, password);
+export const login = async (email, password) => {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    toast.success("Login successful 🎉");
+  } catch (err) {
+
+    if (err.code === "auth/user-not-found") {
+      toast.error("User not found");
+    }
+    else if (err.code === "auth/wrong-password") {
+      toast.error("Wrong password");
+    }
+    else {
+      toast.error("Login failed");
+    }
+  }
+};
 
 ////////////////////////////////////////////////////
 // LOGOUT
 ////////////////////////////////////////////////////
-export const logout = () => signOut(auth);
+export const logout = async () => {
+  await signOut(auth);
+  toast.success("Logged out");
+};
 
 ////////////////////////////////////////////////////
 // RESET PASSWORD
 ////////////////////////////////////////////////////
 export const resetPassword = async (email) => {
   if (!email) {
-    alert("Enter email first");
+    toast.error("Enter email first");
     return;
   }
 
-  await sendPasswordResetEmail(auth, email);
-  alert("Password reset email sent");
+  try {
+    await sendPasswordResetEmail(auth, email);
+    toast.success("Reset email sent 📩");
+  } catch {
+    toast.error("Email not found");
+  }
 };
 
 ////////////////////////////////////////////////////
@@ -103,15 +145,13 @@ export const getProfile = async () => {
 // ADD TO MY LIST
 ////////////////////////////////////////////////////
 export const addToMyList = async (docId, movie) => {
-  console.log("ADDING:", movie);
-
   const refDoc = doc(db, "users", docId);
 
   await updateDoc(refDoc, {
     myList: arrayUnion(movie)
   });
 
-  console.log("ADDED SUCCESS");
+  toast.success("Added to My List");
 };
 
 ////////////////////////////////////////////////////
@@ -123,6 +163,8 @@ export const removeFromMyList = async (docId, movie) => {
   await updateDoc(refDoc, {
     myList: arrayRemove(movie)
   });
+
+  toast.success("Removed from My List");
 };
 
 ////////////////////////////////////////////////////
@@ -137,6 +179,8 @@ export const updateProfileData = async (docId, data) => {
     phone: data.phone || "",
     avatar: data.avatar || ""
   });
+
+  toast.success("Profile updated");
 };
 
 ////////////////////////////////////////////////////
@@ -146,7 +190,6 @@ export const uploadAvatar = async (file, userId) => {
   const storageRef = ref(storage, `avatars/${userId}.png`);
 
   await uploadBytes(storageRef, file);
-
   const url = await getDownloadURL(storageRef);
   return url;
 };

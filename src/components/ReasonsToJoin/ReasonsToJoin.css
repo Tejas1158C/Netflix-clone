@@ -1,0 +1,93 @@
+.reasons-container {
+    padding: 50px 0;
+    color: white;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.reasons-title {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.reasons-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.reason-card {
+    background: linear-gradient(145deg, #1e1e38 0%, #0b0b1a 100%);
+    border-radius: 12px;
+    padding: 16px;
+    position: relative;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.reason-card:hover {
+    transform: scale(1.03);
+}
+
+.reason-content h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #fff;
+    z-index: 2;
+    position: relative;
+}
+
+.reason-content p {
+    font-size: 14px;
+    color: #bbb;
+    line-height: 1.4;
+    margin: 0;
+    max-width: 85%;
+    z-index: 2;
+    position: relative;
+}
+
+.reason-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+/* RESPONSIVE DESIGN */
+@media (min-width: 600px) {
+    .reasons-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .reasons-title {
+        font-size: 24px;
+    }
+
+    .reason-card {
+        min-height: 180px;
+        padding: 24px;
+    }
+
+    .reason-content h3 {
+        font-size: 20px;
+    }
+
+    .reason-content p {
+        font-size: 16px;
+    }
+
+    .reason-icon {
+        bottom: 15px;
+        right: 15px;
+    }
+}

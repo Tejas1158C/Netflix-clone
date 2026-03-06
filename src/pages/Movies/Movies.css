@@ -1,5 +1,5 @@
 /* FULL PAGE */
-.page{
+.page {
   min-height: 100vh;
   background: #141414;
   color: white;
@@ -7,24 +7,24 @@
 }
 
 /* TITLE */
-.page h1{
+.page h1 {
   margin-left: 40px;
   font-size: 28px;
   font-weight: 600;
 }
 
 /* GRID */
-.grid{
+.grid {
   margin-top: 20px;
   padding: 20px 40px;
 
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px,1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 20px;
 }
 
 /* MOVIE CARD */
-.grid img{
+.grid img {
   width: 100%;
   border-radius: 8px;
   transition: transform 0.3s;
@@ -32,6 +32,6 @@
 }
 
 /* HOVER EFFECT */
-.grid img:hover{
+.grid img:hover {
   transform: scale(1.08);
 }

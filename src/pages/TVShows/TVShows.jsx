@@ -10,19 +10,19 @@ const TVShows = () => {
 
   const [shows, setShows] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     fetch(`https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}`)
-    .then(res=>res.json())
-    .then(data=>setShows(data.results))
-  },[])
+      .then(res => res.json())
+      .then(data => setShows(data.results))
+  }, [])
 
   return (
     <div className="page">
-      <Navbar/>
+      <Navbar />
       <h1>TV Shows</h1>
 
       <div className="grid">
-        {shows.map(show=>(
+        {shows.map(show => (
           <Link to={`/player/${show.id}`} key={show.id}>
             <img src={`https://image.tmdb.org/t/p/w300${show.poster_path}`} />
           </Link>

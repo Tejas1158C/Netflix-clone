@@ -3,7 +3,7 @@ import "./TitleCards.css";
 import { Link } from "react-router-dom";
 import { getProfile, addToMyList } from "../../firebase";
 
-const TitleCards = ({ title, category }) => {
+const TitleCards = ({ title, category, onCardClick }) => {
 
   const [apiData, setApiData] = useState([]);
   const cardsRef = useRef(null);
@@ -19,8 +19,7 @@ const TitleCards = ({ title, category }) => {
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${
-        category ? category : "now_playing"
+      `https://api.themoviedb.org/3/movie/${category ? category : "now_playing"
       }?language=en-US&page=1`,
       options
     )
@@ -65,20 +64,25 @@ const TitleCards = ({ title, category }) => {
 
       <div className="cards-list" ref={cardsRef}>
         {apiData?.map((card, index) => (
-          <div className="card" key={index}>
-
-            <Link to={`/player/${card.id}`}>
-              <img
-                src={`https://image.tmdb.org/t/p/w500${card.backdrop_path}`}
-              />
-            </Link>
+          <div
+            className="card"
+            key={index}
+            onClick={() => onCardClick ? onCardClick(card) : null}
+          >
+            <img
+              src={`https://image.tmdb.org/t/p/w500${card.backdrop_path}`}
+              alt={card.original_title}
+            />
 
             <div className="card-info">
               <p>{card.original_title}</p>
 
               <button
                 className="mylist-btn"
-                onClick={() => handleAdd(card)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleAdd(card);
+                }}
               >
                 + My List
               </button>

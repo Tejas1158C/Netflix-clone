@@ -1,0 +1,92 @@
+.trending-now {
+    padding: 20px 0;
+    margin-left: 2%;
+    position: relative;
+    z-index: 5;
+}
+
+.trending-now h2 {
+    font-size: 1.8vw;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.trending-slider {
+    display: flex;
+    overflow-x: scroll;
+    gap: 30px;
+    padding: 20px 40px 20px 20px;
+    scrollbar-width: none;
+}
+
+.trending-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.trending-card {
+    position: relative;
+    flex: 0 0 auto;
+    width: 180px;
+    height: 250px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+}
+
+.trending-card img {
+    height: 100%;
+    width: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 2;
+}
+
+.rank-number {
+    position: absolute;
+    left: -45px;
+    bottom: -25px;
+    font-size: 160px;
+    font-weight: 900;
+    color: #000;
+    -webkit-text-stroke: 2px #fff;
+    /* White outline like the picture */
+    z-index: 3;
+    /* Changed from 1 to 3 to be on top of image */
+    line-height: 1;
+    font-family: 'Outfit', sans-serif;
+    /* Thick premium font */
+    user-select: none;
+    letter-spacing: -10px;
+}
+
+.trending-card:hover {
+    transform: scale(1.05);
+}
+
+.trending-card:hover .rank-number {
+    -webkit-text-stroke: 3px #999;
+}
+
+@media (max-width: 800px) {
+    .trending-now h2 {
+        font-size: 24px;
+    }
+
+    .trending-card {
+        width: 140px;
+        height: 200px;
+    }
+
+    .trending-card img {
+        width: 110px;
+    }
+
+    .rank-number {
+        font-size: 80px;
+        left: -25px;
+    }
+}

@@ -8,23 +8,57 @@
   position: relative;
 }
 
-.back-btn {
+.player-controls {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 30px;
+  left: 30px;
+  right: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+.back-btn {
   width: 40px;
   cursor: pointer;
 }
 
-.player-buttons {
-  position: absolute;
-  bottom: 40px;
+.ai-sub-btn {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid white;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
 }
 
-.player-buttons button {
-  background: red;
+.ai-sub-btn.active {
+  background: #e50914;
+  border-color: #e50914;
+}
+
+.subtitle-overlay {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
   color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
+  padding: 10px 25px;
+  border-radius: 4px;
+  font-size: 24px;
+  font-weight: 500;
+  pointer-events: none;
+  z-index: 5;
+  text-align: center;
+  min-width: 300px;
+}
+
+.subtitle-overlay.generating {
+  font-style: italic;
+  font-size: 18px;
+  color: #ccc;
 }

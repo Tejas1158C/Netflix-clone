@@ -9,19 +9,19 @@ const Movies = () => {
 
   const [movies, setMovies] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`)
-    .then(res=>res.json())
-    .then(data=>setMovies(data.results))
-  },[])
+      .then(res => res.json())
+      .then(data => setMovies(data.results))
+  }, [])
 
   return (
     <div className="page">
-      <Navbar/>
+      <Navbar />
       <h1>Movies</h1>
 
       <div className="grid">
-        {movies.map(movie=>(
+        {movies.map(movie => (
           <Link to={`/player/${movie.id}`} key={movie.id}>
             <img src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} />
           </Link>

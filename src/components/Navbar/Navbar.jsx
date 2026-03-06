@@ -7,7 +7,8 @@ import profile_img from "../../assets/profile_img.png";
 import caret_icon from "../../assets/caret_icon.svg";
 import { logout, getProfile } from "../../firebase";
 import { useNavigate } from "react-router-dom";
-import MyList from "../../pages/MyList/MyList";
+import Notifications from "../Notifications/Notifications";
+import { initialNotifications } from "../../data/notificationData";
 
 const Navbar = () => {
   const navRef = useRef();
@@ -18,12 +19,27 @@ const Navbar = () => {
   const [showNotif, setShowNotif] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [user, setUser] = useState(null);
+  const [notifications, setNotifications] = useState(initialNotifications);
 
   useEffect(() => {
     getProfile().then(setUser);
   }, []);
 
-  // dark navbar
+  const unreadCount = notifications.filter(n => n.unread).length;
+
+  const handleMarkRead = (id) => {
+    setNotifications(prev =>
+      prev.map(n => n.id === id ? { ...n, unread: false } : n)
+    );
+  };
+
+  const handleMarkAllRead = () => {
+    setNotifications(prev =>
+      prev.map(n => ({ ...n, unread: false }))
+    );
+  };
+
+  // dark navbar on scroll
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= 80) {
@@ -80,33 +96,15 @@ const Navbar = () => {
         <div className="notif-wrapper" ref={notifRef}>
           <div className="bell-click" onClick={() => setShowNotif(!showNotif)}>
             <img src={bell_icon} className="icon" />
-            <span className="dot"></span>
+            {unreadCount > 0 && <span className="notif-badge">{unreadCount}</span>}
           </div>
 
           {showNotif && (
-            <div className="notif-panel">
-              <h4>Notifications</h4>
-
-              <div className="notif-item">
-                🎬 New movie released
-                <span>2 min ago</span>
-              </div>
-
-              <div className="notif-item">
-                🔥 Trending show added
-                <span>1 hour ago</span>
-              </div>
-
-              <div className="notif-item">
-                ⭐ Recommended for you
-                <span>Today</span>
-              </div>
-
-              <div className="notif-item">
-                👀 Continue watching
-                <span>Yesterday</span>
-              </div>
-            </div>
+            <Notifications
+              notifications={notifications}
+              onMarkRead={handleMarkRead}
+              onMarkAllRead={handleMarkAllRead}
+            />
           )}
         </div>
 

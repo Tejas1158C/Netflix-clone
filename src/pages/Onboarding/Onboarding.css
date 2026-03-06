@@ -1,0 +1,419 @@
+.onboarding-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    color: #333;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* HEADER */
+.onboarding-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.onboarding-header.transparent {
+    background: transparent;
+    border-bottom: none;
+}
+
+.onboarding-header.white {
+    background: white;
+}
+
+.onboarding-header .logo {
+    width: 120px;
+}
+
+.sign-out-btn {
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}
+
+.sign-out-btn.dark {
+    color: white;
+    background-color: #e50914;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.sign-out-btn.light {
+    color: #333;
+    font-weight: 600;
+}
+
+.sign-out-btn.light:hover {
+    text-decoration: underline;
+}
+
+/* STEP 1: SPLASH SCREEN */
+.step-1-splash {
+    height: 100vh;
+    /* Normally you would set the background image here, but for now we use a dark gradient */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.9) 100%), url('../../assets/hero_banner.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.splash-content h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.splash-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.finish-signup-btn {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    font-size: 24px;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.finish-signup-btn:hover {
+    background-color: #f40612;
+}
+
+/* SHARED STEP CONTAINERS (WHITE BG) */
+.step-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 20px 50px 20px;
+}
+
+.step-container.large {
+    align-items: flex-start;
+    padding-top: 120px;
+}
+
+.step-content {
+    max-width: 340px;
+    width: 100%;
+}
+
+.step-container.large .step-content {
+    max-width: 900px;
+}
+
+.text-center {
+    text-align: left;
+}
+
+.step-indicator {
+    display: block;
+    font-size: 13px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.step-content h2 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.next-btn {
+    width: 100%;
+    background-color: #e50914;
+    color: white;
+    padding: 18px;
+    font-size: 24px;
+    font-weight: 400;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.next-btn:hover {
+    background-color: #f40612;
+}
+
+.max-w {
+    max-width: 400px;
+    margin: 30px auto 0 auto;
+    display: block;
+}
+
+/* STEP 2: CHECKLIST */
+.checkmark-circle {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #e50914;
+    border-radius: 50%;
+    color: #e50914;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin: 0 auto 20px auto;
+}
+
+.checklist {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.checklist li {
+    display: flex;
+    align-items: flex-start;
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.checklist .check {
+    color: #e50914;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+/* STEP 3: PLAN GRID */
+.plans-grid {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    justify-content: flex-end;
+}
+
+.plan-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    width: 120px;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.plan-card.selected {
+    background: linear-gradient(135deg, #1e3a8a, #4c1d95, #c026d3);
+    color: white;
+    border: none;
+    opacity: 1;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.popular-tag {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #c026d3;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+.plan-card h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.plan-card p {
+    font-size: 12px;
+    margin: 0;
+}
+
+.selected-check {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    font-size: 14px;
+}
+
+.plan-details-table {
+    border-top: 1px solid #e6e6e6;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #e6e6e6;
+    font-size: 14px;
+    color: #737373;
+}
+
+.detail-row .highlight {
+    color: #333;
+    font-weight: 500;
+}
+
+.disclaimer {
+    font-size: 12px;
+    color: #737373;
+    line-height: 1.5;
+    margin-top: 20px;
+}
+
+/* STEP 4: PAYMENT OPTIONS */
+.lock-circle {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #e50914;
+    border-radius: 50%;
+    color: #e50914;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin: 0 auto 20px auto;
+}
+
+.pay-desc {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.secure-desc {
+    font-size: 16px;
+    margin-bottom: 30px;
+    line-height: 1.4;
+}
+
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.payment-box {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s;
+}
+
+.payment-box:hover {
+    background-color: #f4f4f4;
+}
+
+.payment-box .icons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.payment-box .icons span {
+    font-size: 12px;
+    font-weight: bold;
+    color: #141414;
+}
+
+.payment-box .arrow {
+    color: #8c8c8c;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+/* MOCK PAYMENT FORM (STEP 4 EXPANDED) */
+.payment-form-wrapper {
+    width: 100%;
+}
+
+.payment-form-wrapper h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: #0071eb;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0;
+}
+
+.back-btn:hover {
+    text-decoration: underline;
+}
+
+.mock-payment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mock-payment-form input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #8c8c8c;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+}
+
+.split-inputs {
+    display: flex;
+    gap: 10px;
+}
+
+.upi-help {
+    font-size: 12px;
+    color: #737373;
+    margin-top: -5px;
+}
+
+.summary-box {
+    background-color: #f4f4f4;
+    border-radius: 4px;
+    padding: 15px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summary-box p {
+    margin: 0;
+    color: #333;
+}
+
+.pay-now-btn {
+    margin-top: 20px;
+}
+
+.pay-now-btn:disabled {
+    background-color: #f40612;
+    opacity: 0.7;
+    cursor: not-allowed;
+}

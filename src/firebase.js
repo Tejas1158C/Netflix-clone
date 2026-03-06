@@ -142,6 +142,20 @@ export const getProfile = async () => {
 };
 
 ////////////////////////////////////////////////////
+// ACTIVATE SUBSCRIPTION (Mock Payment)
+////////////////////////////////////////////////////
+export const activateSubscription = async (docId, planDetails) => {
+  const refDoc = doc(db, "users", docId);
+
+  await updateDoc(refDoc, {
+    planName: planDetails.name,
+    planPrice: planDetails.monthlyPrice,
+    planResolution: planDetails.resolution,
+    expiryDate: planDetails.expiryDate // ISO string formatted date
+  });
+};
+
+////////////////////////////////////////////////////
 // ADD TO MY LIST
 ////////////////////////////////////////////////////
 export const addToMyList = async (docId, movie) => {

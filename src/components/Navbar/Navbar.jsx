@@ -42,10 +42,12 @@ const Navbar = () => {
   // dark navbar on scroll
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY >= 80) {
-        navRef.current.classList.add("nav-dark");
-      } else {
-        navRef.current.classList.remove("nav-dark");
+      if (navRef.current) {
+        if (window.scrollY >= 80) {
+          navRef.current.classList.add("nav-dark");
+        } else {
+          navRef.current.classList.remove("nav-dark");
+        }
       }
     };
     window.addEventListener("scroll", handleScroll);

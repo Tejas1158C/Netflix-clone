@@ -3,8 +3,6 @@ import './Login.css'
 import logo from '../../assets/logo.png'
 import netflix_spinner from '../../assets/netflix_spinner.gif'
 import { login, signup, resetPassword } from '../../firebase'
-import { toast } from 'react-toastify'
-import { Link } from 'react-router-dom'
 
 const Login = () => {
 
@@ -91,16 +89,16 @@ const Login = () => {
             {signState === "Sign In" ?
               <p>
                 New to Netflix?
-                <Link to="#" onClick={() => setSignState("Sign Up")}>
+                <span className="login-link-span" onClick={() => setSignState("Sign Up")}>
                   Sign Up Now
-                </Link>
+                </span>
               </p>
               :
               <p>
                 Already have account?
-                <Link to="#" onClick={() => setSignState("Sign In")}>
+                <span className="login-link-span" onClick={() => setSignState("Sign In")}>
                   Sign In
-                </Link>
+                </span>
               </p>
             }
           </div>

@@ -10,12 +10,13 @@ import {
 import {
   getFirestore,
   collection,
-  addDoc,
+  setDoc,
+  getDoc,
   getDocs,
   query,
   where,
-  updateDoc,
   doc,
+  updateDoc,
   arrayUnion,
   arrayRemove
 } from "firebase/firestore";
@@ -52,7 +53,7 @@ export const signup = async (name, email, password) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
 
-    await addDoc(collection(db, "users"), {
+    await setDoc(doc(db, "users", res.user.uid), {
       uid: res.user.uid,
       name,
       email,
@@ -129,16 +130,32 @@ export const resetPassword = async (email) => {
 // GET PROFILE
 ////////////////////////////////////////////////////
 export const getProfile = async () => {
-  const user = auth.currentUser;
-  if (!user) return null;
+  try {
+    const user = auth.currentUser;
+    if (!user) return null;
 
-  const q = query(collection(db, "users"), where("uid", "==", user.uid));
-  const snap = await getDocs(q);
+    // 1. Try fetching by UID as Doc ID (New Format)
+    const docRef = doc(db, "users", user.uid);
+    const snap = await getDoc(docRef);
 
-  if (snap.empty) return null;
+    if (snap.exists()) {
+      return { id: snap.id, ...snap.data() };
+    }
 
-  const d = snap.docs[0];
-  return { id: d.id, ...d.data() };
+    // 2. Fallback: Query for UID field (Old Format)
+    const q = query(collection(db, "users"), where("uid", "==", user.uid));
+    const querySnap = await getDocs(q);
+
+    if (!querySnap.empty) {
+      const d = querySnap.docs[0];
+      return { id: d.id, ...d.data() };
+    }
+
+    return null;
+  } catch (err) {
+    console.error("Firebase getProfile error:", err);
+    return null;
+  }
 };
 
 ////////////////////////////////////////////////////

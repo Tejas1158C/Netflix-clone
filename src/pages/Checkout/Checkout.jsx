@@ -41,10 +41,17 @@ const Checkout = () => {
     }, [plan, navigate]);
 
     const loadUser = async () => {
-        const data = await getProfile();
-        setUser(data);
-        if (data) {
-            setCardData(prev => ({ ...prev, email: data.email, name: data.name }));
+        try {
+            const data = await getProfile();
+            setUser(data);
+            if (data) {
+                setCardData(prev => ({ ...prev, email: data.email, name: data.name }));
+            } else {
+                toast.error("User profile not found. Please try logging in again.");
+            }
+        } catch (err) {
+            console.error(err);
+            toast.error("Failed to load user profile.");
         }
     };
 
@@ -91,6 +98,9 @@ const Checkout = () => {
 
                     toast.success("Payment successful! Your plan has been updated. 🎉");
                     navigate("/profile");
+                } else {
+                    toast.error("Error: User session expired or profile missing. Please re-login.");
+                    setLoading(false);
                 }
             } catch (err) {
                 console.error(err);

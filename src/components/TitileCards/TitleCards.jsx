@@ -40,7 +40,7 @@ const TitleCards = ({ title, category, onCardClick }) => {
     const ref = cardsRef.current;
     if (!ref) return;
 
-    ref.addEventListener("wheel", handleWheel);
+    ref.addEventListener("wheel", handleWheel, { passive: false });
     return () => ref.removeEventListener("wheel", handleWheel);
   }, []);
 

@@ -91,14 +91,14 @@ const Login = () => {
             {signState === "Sign In" ?
               <p>
                 New to Netflix?
-                <Link onClick={() => setSignState("Sign Up")}>
+                <Link to="#" onClick={() => setSignState("Sign Up")}>
                   Sign Up Now
                 </Link>
               </p>
               :
               <p>
                 Already have account?
-                <Link onClick={() => setSignState("Sign In")}>
+                <Link to="#" onClick={() => setSignState("Sign In")}>
                   Sign In
                 </Link>
               </p>

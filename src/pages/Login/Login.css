@@ -1,14 +1,16 @@
-.login{
+.login {
     height: 100vh;
-    background-image: linear-gradient(#0000007e,#0000007e), url(../../assets/background_banner.jpg); 
-    padding: 20px 8%; 
+    background-image: linear-gradient(#0000007e, #0000007e), url(../../assets/background_banner.jpg);
+    padding: 20px 8%;
     background-size: cover;
     background-position: center;
 }
-.login-logo{
-    width:150px;
+
+.login-logo {
+    width: 150px;
 }
-.login-form{
+
+.login-form {
     max-width: 450px;
     width: 100%;
     background: rgba(0, 0, 0, 0.75);
@@ -16,31 +18,36 @@
     padding: 60px;
     margin: auto;
 }
-.login-form h1{
+
+.login-form h1 {
     margin-bottom: 28px;
     font-size: 32px;
     font-weight: 500;
 }
-.login-form input{
+
+.login-form input {
     width: 100%;
     padding: 16px 20px;
     margin: 12px 0;
     border-radius: 4px;
     border: 0;
     font-size: 16px;
-    background: #333;;
+    background: #333;
+    ;
     color: #fff;
     outline: 0;
     font-weight: 500;
     height: 50px;
 }
-.login-form input::placeholder{
+
+.login-form input::placeholder {
     font-size: 16px;
     font-weight: 500;
 }
-.login-form button{
+
+.login-form button {
     width: 100%;
-    padding: 16px ;
+    padding: 16px;
     margin-top: 20px;
     border-radius: 4px;
     border: 0;
@@ -51,7 +58,8 @@
     outline: 0;
     cursor: pointer;
 }
-.form-help{
+
+.form-help {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -59,31 +67,48 @@
     font-size: 13px;
     margin-top: 10px;
 }
-.remember-me{
+
+.remember-me {
     display: flex;
     align-items: center;
     gap: 6px;
 }
-.remember-me input[type="checkbox"]{
+
+.remember-me input[type="checkbox"] {
     width: 16px;
     height: 16px;
     cursor: pointer;
 }
-.remember-me label{
+
+.remember-me label {
     cursor: pointer;
 }
-.form-switch{
+
+.form-switch {
     margin-top: 40px;
     color: #737373;
 }
-.form-switch p{
-    margin-left: 6px;
-    color: #fff;
-    font-weight: 350;
-    cursor: pointer;
+
+.form-switch p {
+    margin-top: 15px;
+    color: #737373;
+    font-size: 16px;
+    font-weight: 400;
 }
-.netflix-spinner{
-    position: fixed;   
+
+.form-switch p a {
+    color: #fff;
+    margin-left: 5px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.form-switch p a:hover {
+    text-decoration: underline;
+}
+
+.netflix-spinner {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
@@ -91,22 +116,30 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #000;  
+    background: #000;
     z-index: 9999;
 }
-.netflix-spinner img{
+
+.netflix-spinner img {
     width: 70px;
     animation: spin 1s linear infinite;
 }
-@keyframes spin{
-  0%{transform:rotate(0deg);}
-  100%{transform:rotate(360deg);}
-}
-.forgot{
-  cursor:pointer;
-  color:#b3b3b3;
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
-.forgot:hover{
-  text-decoration:underline;
+.forgot {
+    cursor: pointer;
+    color: #b3b3b3;
+}
+
+.forgot:hover {
+    text-decoration: underline;
 }

@@ -89,16 +89,16 @@ const Login = () => {
             {signState === "Sign In" ?
               <p>
                 New to Netflix?
-                <span className="login-link-span" onClick={() => setSignState("Sign Up")}>
+                <a href="#" className="login-link-span login-link-bold" onClick={(e) => { e.preventDefault(); setSignState("Sign Up"); }}>
                   Sign Up Now
-                </span>
+                </a>
               </p>
               :
               <p>
                 Already have account?
-                <span className="login-link-span" onClick={() => setSignState("Sign In")}>
+                <a href="#" className="login-link-span login-link-bold" onClick={(e) => { e.preventDefault(); setSignState("Sign In"); }}>
                   Sign In
-                </span>
+                </a>
               </p>
             }
           </div>

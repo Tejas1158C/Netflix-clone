@@ -120,3 +120,26 @@
 .login-link-bold:hover {
     text-decoration: underline;
 }
+
+.google-signin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #fff;
+    color: #000;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.google-signin:hover {
+    background: #e6e6e6;
+}
+
+.google-signin img {
+    width: 20px;
+}

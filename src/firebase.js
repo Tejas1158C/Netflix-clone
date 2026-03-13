@@ -4,7 +4,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  sendPasswordResetEmail
+  sendPasswordResetEmail,
+  GoogleAuthProvider,
+  signInWithPopup
 } from "firebase/auth";
 
 import {
@@ -45,6 +47,8 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
+
+const googleProvider = new GoogleAuthProvider();
 
 ////////////////////////////////////////////////////
 // SIGNUP
@@ -98,6 +102,35 @@ export const login = async (email, password) => {
     else {
       toast.error("Login failed");
     }
+  }
+};
+
+////////////////////////////////////////////////////
+// GOOGLE SIGN IN
+////////////////////////////////////////////////////
+export const googleSignIn = async () => {
+  try {
+    const res = await signInWithPopup(auth, googleProvider);
+    const user = res.user;
+
+    const userDocRef = doc(db, "users", user.uid);
+    const userDocSnap = await getDoc(userDocRef);
+
+    if (!userDocSnap.exists()) {
+      await setDoc(userDocRef, {
+        uid: user.uid,
+        name: user.displayName || "Netflix User",
+        email: user.email,
+        phone: "",
+        avatar: user.photoURL || "",
+        myList: []
+      });
+    }
+
+    toast.success("Login successful 🎉");
+  } catch (err) {
+    console.error("Google Sign-In Error:", err);
+    toast.error("Google login failed");
   }
 };
 

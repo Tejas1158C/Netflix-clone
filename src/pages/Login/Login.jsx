@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './Login.css'
 import logo from '../../assets/logo.png'
 import netflix_spinner from '../../assets/netflix_spinner.gif'
-import { login, signup, resetPassword } from '../../firebase'
+import { login, signup, resetPassword, googleSignIn } from '../../firebase'
 
 const Login = () => {
 
@@ -22,6 +22,12 @@ const Login = () => {
       await signup(name, email, password);
     }
 
+    setLoading(false);
+  };
+
+  const handleGoogleSignIn = async () => {
+    setLoading(true);
+    await googleSignIn();
     setLoading(false);
   };
 
@@ -86,6 +92,10 @@ const Login = () => {
           </form>
 
           <div className="form-switch">
+            <div className="google-signin" onClick={handleGoogleSignIn}>
+              <img src="https://uid-public.s3.amazonaws.com/google.png" alt="Google" />
+              <span>Sign in with Google</span>
+            </div>
             {signState === "Sign In" ?
               <p>
                 New to Netflix?

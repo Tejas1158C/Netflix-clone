@@ -130,7 +130,16 @@ export const googleSignIn = async () => {
     toast.success("Login successful 🎉");
   } catch (err) {
     console.error("Google Sign-In Error:", err);
-    toast.error("Google login failed");
+    
+    if (err.code === "auth/operation-not-allowed") {
+      toast.error("Google Sign-In is not enabled in Firebase Console");
+    } else if (err.code === "auth/popup-closed-by-user") {
+      toast.error("Login popup closed. Please try again.");
+    } else if (err.code === "auth/cancelled-popup-request") {
+        toast.error("Request cancelled by browser. Try again.");
+    } else {
+      toast.error("Google login failed: " + err.message);
+    }
   }
 };
 

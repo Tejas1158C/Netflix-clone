@@ -93,7 +93,7 @@ const Login = () => {
 
           <div className="form-switch">
             <div className="google-signin" onClick={handleGoogleSignIn}>
-              <img src="https://uid-public.s3.amazonaws.com/google.png" alt="Google" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" />
               <span>Sign in with Google</span>
             </div>
             {signState === "Sign In" ?

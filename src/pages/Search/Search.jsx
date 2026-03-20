@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./Search.css";
 
-const API_KEY = "418ff9ee423b1f27393a01410f05f82c";
+const API_KEY = "a2ed92f612e79561d908205b2ecd941f";
 
 const Search = () => {
   const navigate = useNavigate();

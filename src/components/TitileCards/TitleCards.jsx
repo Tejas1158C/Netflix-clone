@@ -13,7 +13,7 @@ const TitleCards = ({ title, category, onCardClick }) => {
     headers: {
       accept: "application/json",
       Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MThmZjllZTQyM2IxZjI3MzkzYTAxNDEwZjA1ZjgyYyIsIm5iZiI6MTc3MDMwNDg0OC4yMDMsInN1YiI6IjY5ODRiNTUwNWJiYzc4MzA4ZTkxMzA5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.bbcNYKKMPQUEf-QyO4KVDqpK2o1atulPdQHVfvh5T38"
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMmVkOTJmNjEyZTc5NTYxZDkwODIwNWlyZWNkOTQxZilsIm5iZiI6MTc3MDMwNDg0OC4yMDMsInN1Yil6IjY5ODRiNTUwNWJiYzc4MzA4ZTkxMzA5YilsInNjb3Blcyl6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uljoxfQ.F8WFsqkSoNEwH2U3UvsR5It1YipQC0SazPP61upWdT4"
     }
   };
 

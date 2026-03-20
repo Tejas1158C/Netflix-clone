@@ -3,7 +3,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import "./Movies.css";
 import { Link } from "react-router-dom";
 
-const API_KEY = "418ff9ee423b1f27393a01410f05f82c";
+const API_KEY = "a2ed92f612e79561d908205b2ecd941f";
 
 const Movies = () => {
 

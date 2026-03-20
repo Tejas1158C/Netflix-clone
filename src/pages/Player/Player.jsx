@@ -3,7 +3,7 @@ import './Player.css';
 import back_arrow_icon from '../../assets/back_arrow_icon.png';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const API_KEY = "418ff9ee423b1f27393a01410f05f82c";
+const API_KEY = "a2ed92f612e79561d908205b2ecd941f";
 
 const Player = () => {
 

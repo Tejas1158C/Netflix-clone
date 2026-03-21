@@ -35,7 +35,7 @@ import { toast } from "react-toastify";
 ////////////////////////////////////////////////////
 const firebaseConfig = {
   apiKey: "AIzaSyAfX52-wASO2WAZBMsjijuH4-RK75H3QPo",
-  authDomain: "netflix-clone-5e585.firebaseapp.com",
+  authDomain: "netflix-clone-88.vercel.app",
   projectId: "netflix-clone-5e585",
   storageBucket: "netflix-clone-5e585.firebasestorage.app",
   messagingSenderId: "497992933218",
@@ -130,13 +130,13 @@ export const googleSignIn = async () => {
     toast.success("Login successful 🎉");
   } catch (err) {
     console.error("Google Sign-In Error:", err);
-    
+
     if (err.code === "auth/operation-not-allowed") {
       toast.error("Google Sign-In is not enabled in Firebase Console");
     } else if (err.code === "auth/popup-closed-by-user") {
       toast.error("Login popup closed. Please try again.");
     } else if (err.code === "auth/cancelled-popup-request") {
-        toast.error("Request cancelled by browser. Try again.");
+      toast.error("Request cancelled by browser. Try again.");
     } else {
       toast.error("Google login failed: " + err.message);
     }

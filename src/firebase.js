@@ -35,7 +35,7 @@ import { toast } from "react-toastify";
 ////////////////////////////////////////////////////
 const firebaseConfig = {
   apiKey: "AIzaSyAfX52-wASO2WAZBMsjijuH4-RK75H3QPo",
-  authDomain: "netflix-clone-5e585.firebaseapp.com",
+  authDomain: window.location.hostname === "localhost" ? "netflix-clone-5e585.firebaseapp.com" : "netflix-clone-app-gfgp.vercel.app",
   projectId: "netflix-clone-5e585",
   storageBucket: "netflix-clone-5e585.firebasestorage.app",
   messagingSenderId: "497992933218",

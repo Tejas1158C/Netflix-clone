@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useRef, useEffect, useState } from "react";
 import "./TitleCards.css";
 import { Link } from "react-router-dom";
@@ -18,7 +19,7 @@ const TitleCards = ({ title, category, onCardClick }) => {
   useEffect(() => {
     fetch(
       `https://api.themoviedb.org/3/movie/${category ? category : "now_playing"
-      }?language=en-US&page=1&api_key=a2ed92f612e79561d908205b2ecd941f`,
+      }?language=en-US&page=1&api_key=${import.meta.env.VITE_TMDB_API_KEY}`,
       options
     )
       .then(res => res.json())
@@ -29,18 +30,11 @@ const TitleCards = ({ title, category, onCardClick }) => {
   }, [category]);
 
   const handleWheel = (e) => {
-    e.preventDefault();
     if (cardsRef.current)
       cardsRef.current.scrollLeft += e.deltaY;
   };
 
-  useEffect(() => {
-    const ref = cardsRef.current;
-    if (!ref) return;
 
-    ref.addEventListener("wheel", handleWheel, { passive: false });
-    return () => ref.removeEventListener("wheel", handleWheel);
-  }, []);
 
   const handleAdd = async (card) => {
     const user = await getProfile();
@@ -60,7 +54,7 @@ const TitleCards = ({ title, category, onCardClick }) => {
     <div className="title-cards">
       <h2>{title || "Popular"}</h2>
 
-      <div className="cards-list" ref={cardsRef}>
+      <div className="cards-list" ref={cardsRef} onWheel={handleWheel}>
         {apiData?.map((card, index) => (
           <div
             className="card"

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Recommendations.css';
 
-const API_KEY = "a2ed92f612e79561d908205b2ecd941f";
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 const Recommendations = ({ movieId, type = "movie", onCardClick }) => {
     const [recommendations, setRecommendations] = useState([]);

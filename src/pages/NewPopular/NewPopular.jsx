@@ -3,7 +3,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import "./Movies.css";
 import { Link } from "react-router-dom";
 
-const API_KEY = "a2ed92f612e79561d908205b2ecd941f";
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 const NewPopular = () => {
 

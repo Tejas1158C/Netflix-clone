@@ -3,7 +3,7 @@ import './Player.css';
 import back_arrow_icon from '../../assets/back_arrow_icon.png';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const API_KEY = "a2ed92f612e79561d908205b2ecd941f";
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 const Player = () => {
 

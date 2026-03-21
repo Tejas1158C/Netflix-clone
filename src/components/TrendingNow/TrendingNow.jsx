@@ -5,7 +5,7 @@ const TrendingNow = ({ onCardClick }) => {
     const [apiData, setApiData] = useState([]);
     const cardsRef = useRef();
 
-    const API_KEY = "a2ed92f612e79561d908205b2ecd941f";
+    const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
     const options = {
         method: 'GET',
@@ -31,24 +31,17 @@ const TrendingNow = ({ onCardClick }) => {
     }, [])
 
     const handleWheel = (event) => {
-        event.preventDefault();
         if (cardsRef.current) {
             cardsRef.current.scrollLeft += event.deltaY;
         }
     }
 
-    useEffect(() => {
-        const ref = cardsRef.current;
-        if (!ref) return;
 
-        ref.addEventListener("wheel", handleWheel, { passive: false });
-        return () => ref.removeEventListener("wheel", handleWheel);
-    }, []);
 
     return (
         <div className='trending-now'>
             <h2>Trending Now</h2>
-            <div className="trending-slider" ref={cardsRef}>
+            <div className="trending-slider" ref={cardsRef} onWheel={handleWheel}>
                 {apiData.map((movie, index) => {
                     return (
                         <div className="trending-card" key={index} onClick={() => onCardClick(movie)}>

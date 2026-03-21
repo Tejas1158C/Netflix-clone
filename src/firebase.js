@@ -4,9 +4,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  sendPasswordResetEmail,
-  GoogleAuthProvider,
-  signInWithPopup
+  sendPasswordResetEmail
 } from "firebase/auth";
 
 import {
@@ -48,7 +46,6 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
 
-const googleProvider = new GoogleAuthProvider();
 
 ////////////////////////////////////////////////////
 // SIGNUP
@@ -105,43 +102,6 @@ export const login = async (email, password) => {
   }
 };
 
-////////////////////////////////////////////////////
-// GOOGLE SIGN IN
-////////////////////////////////////////////////////
-export const googleSignIn = async () => {
-  try {
-    const res = await signInWithPopup(auth, googleProvider);
-    const user = res.user;
-
-    const userDocRef = doc(db, "users", user.uid);
-    const userDocSnap = await getDoc(userDocRef);
-
-    if (!userDocSnap.exists()) {
-      await setDoc(userDocRef, {
-        uid: user.uid,
-        name: user.displayName || "Netflix User",
-        email: user.email,
-        phone: "",
-        avatar: user.photoURL || "",
-        myList: []
-      });
-    }
-
-    toast.success("Login successful 🎉");
-  } catch (err) {
-    console.error("Google Sign-In Error:", err);
-
-    if (err.code === "auth/operation-not-allowed") {
-      toast.error("Google Sign-In is not enabled in Firebase Console");
-    } else if (err.code === "auth/popup-closed-by-user") {
-      toast.error("Login popup closed. Please try again.");
-    } else if (err.code === "auth/cancelled-popup-request") {
-      toast.error("Request cancelled by browser. Try again.");
-    } else {
-      toast.error("Google login failed: " + err.message);
-    }
-  }
-};
 
 ////////////////////////////////////////////////////
 // LOGOUT

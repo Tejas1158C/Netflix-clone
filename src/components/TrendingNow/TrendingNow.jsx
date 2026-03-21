@@ -5,23 +5,24 @@ const TrendingNow = ({ onCardClick }) => {
     const [apiData, setApiData] = useState([]);
     const cardsRef = useRef();
 
-    // TMDB API Key from environment or hardcoded mapping from previous context knowledge
-    const API_KEY = "8dda9998-4dd5-49c1-81af-5442e66c2441"; // Placeholder if not found, but I will use the standard TMDB URL structure used in this project
+    const API_KEY = "a2ed92f612e79561d908205b2ecd941f";
 
-    // Previous logs show TitleCards uses options with a bearer token
     const options = {
         method: 'GET',
         headers: {
-            accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMmVkOTJmNjEyZTc5NTYxZDkwODIwNWlyZWNkOTQxZilsIm5iZiI6MTc3MDMwNDg0OC4yMDMsInN1Yil6IjY5ODRiNTUwNWJiYzc4MzA4ZTkxMzA5YilsInNjb3Blcyl6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uljoxfQ.F8WFsqkSoNEwH2U3UvsR5It1YipQC0SazPP61upWdT4'
+            accept: 'application/json'
         }
     };
 
     const fetchTrending = () => {
         // Fetching popular movies as trending
-        fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options)
+        fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`, options)
             .then(res => res.json())
-            .then(res => setApiData(res.results.slice(0, 10)))
+            .then(res => {
+                if (res.results) {
+                    setApiData(res.results.slice(0, 10));
+                }
+            })
             .catch(err => console.error(err));
     }
 
@@ -31,13 +32,23 @@ const TrendingNow = ({ onCardClick }) => {
 
     const handleWheel = (event) => {
         event.preventDefault();
-        cardsRef.current.scrollLeft += event.deltaY;
+        if (cardsRef.current) {
+            cardsRef.current.scrollLeft += event.deltaY;
+        }
     }
+
+    useEffect(() => {
+        const ref = cardsRef.current;
+        if (!ref) return;
+
+        ref.addEventListener("wheel", handleWheel, { passive: false });
+        return () => ref.removeEventListener("wheel", handleWheel);
+    }, []);
 
     return (
         <div className='trending-now'>
             <h2>Trending Now</h2>
-            <div className="trending-slider" ref={cardsRef} onWheel={handleWheel}>
+            <div className="trending-slider" ref={cardsRef}>
                 {apiData.map((movie, index) => {
                     return (
                         <div className="trending-card" key={index} onClick={() => onCardClick(movie)}>

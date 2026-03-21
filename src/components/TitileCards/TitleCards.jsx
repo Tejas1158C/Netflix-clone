@@ -11,16 +11,14 @@ const TitleCards = ({ title, category, onCardClick }) => {
   const options = {
     method: "GET",
     headers: {
-      accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMmVkOTJmNjEyZTc5NTYxZDkwODIwNWlyZWNkOTQxZilsIm5iZiI6MTc3MDMwNDg0OC4yMDMsInN1Yil6IjY5ODRiNTUwNWJiYzc4MzA4ZTkxMzA5YilsInNjb3Blcyl6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uljoxfQ.F8WFsqkSoNEwH2U3UvsR5It1YipQC0SazPP61upWdT4"
+      accept: "application/json"
     }
   };
 
   useEffect(() => {
     fetch(
       `https://api.themoviedb.org/3/movie/${category ? category : "now_playing"
-      }?language=en-US&page=1`,
+      }?language=en-US&page=1&api_key=a2ed92f612e79561d908205b2ecd941f`,
       options
     )
       .then(res => res.json())
